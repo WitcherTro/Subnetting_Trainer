@@ -27,7 +27,7 @@ public class MainWindow {
         this.mask = SubnetMasks.values()[(int) (Math.random() * 22)];
         this.result = new ResultCalculator(ipAdress.getIPAdress(), mask);
         this.ipLabel.setText("IP: "+ipAdress.toString());
-        this.maskLabel.setText("Maska: "+mask.toString() + "/" + mask.getPrefix());
+        this.maskLabel.setText("Mask: "+mask.toString() + "/" + mask.getPrefix());
 
 
         this.button1.addActionListener(e -> {
@@ -37,31 +37,31 @@ public class MainWindow {
             String broadcast = this.broadcastField.getText();
             if (this.result.compareNetworkAdress(networkadress)) {
                 this.networkAdressResultLabel.setForeground(Color.GREEN);
-                this.networkAdressResultLabel.setText("Adresa siete: OK");
+                this.networkAdressResultLabel.setText("Network address: OK");
             } else {
                 this.networkAdressResultLabel.setForeground(Color.RED);
-                this.networkAdressResultLabel.setText("Adresa siete: ZLE");
+                this.networkAdressResultLabel.setText("Network address: BAD");
             }
             if (this.result.compareFirstHost(firstUsable)) {
                 this.firstUsableResultLabel.setForeground(Color.GREEN);
-                this.firstUsableResultLabel.setText("Prvá použiteľná adresa: OK");
+                this.firstUsableResultLabel.setText("First usable address: OK");
             } else {
                 this.firstUsableResultLabel.setForeground(Color.RED);
-                this.firstUsableResultLabel.setText("Prvá použiteľná adresa: ZLE");
+                this.firstUsableResultLabel.setText("First usable address: BAD");
             }
             if (this.result.compareLastHost(lastUsable)) {
                 this.lastUsableResultLabel.setForeground(Color.GREEN);
-                this.lastUsableResultLabel.setText("Posledná použiteľná adresa: OK");
+                this.lastUsableResultLabel.setText("Last usable address: OK");
             } else {
                 this.lastUsableResultLabel.setForeground(Color.RED);
-                this.lastUsableResultLabel.setText("Posledná použiteľná adresa: ZLE");
+                this.lastUsableResultLabel.setText("Last usable address: BAD");
             }
             if (this.result.compareBroadcastAdress(broadcast)) {
                 this.broadcastResultLabel.setForeground(Color.GREEN);
-                this.broadcastResultLabel.setText("Broadcastová adresa: OK");
+                this.broadcastResultLabel.setText("Broadcast address: OK");
             } else {
                 this.broadcastResultLabel.setForeground(Color.RED);
-                this.broadcastResultLabel.setText("Broadcastová adresa: ZLE");
+                this.broadcastResultLabel.setText("Broadcast address: BAD");
             }
         });
 
@@ -70,7 +70,7 @@ public class MainWindow {
             this.mask = SubnetMasks.values()[(int) (Math.random() * 22)];
             this.result = new ResultCalculator(ipAdress.getIPAdress(), mask);
             this.ipLabel.setText("IP: "+ipAdress.toString());
-            this.maskLabel.setText("Maska: "+mask.toString() + "/" + mask.getPrefix());
+            this.maskLabel.setText("Mask: "+mask.toString() + "/" + mask.getPrefix());
             this.networkAdressField.setText("");
             this.networkAdressResultLabel.setText("");
             this.firstUsableField.setText("");

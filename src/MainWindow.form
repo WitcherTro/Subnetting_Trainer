@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="10" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="5" y="5" width="500" height="400"/>
+      <xy x="5" y="5" width="500" height="474"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -40,7 +40,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Zadaj adresu siete:"/>
+              <text value="Enter network address:"/>
             </properties>
           </component>
           <component id="cb988" class="javax.swing.JTextField" binding="networkAdressField">
@@ -59,7 +59,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Zadaj prvú použiteľnú adresu:"/>
+              <text value="Enter first usable address:"/>
             </properties>
           </component>
           <component id="ff543" class="javax.swing.JTextField" binding="firstUsableField">
@@ -78,7 +78,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Zadaj poslednú použiteľnú adresu:"/>
+              <text value="Enter last usable address:"/>
             </properties>
           </component>
           <component id="dc16a" class="javax.swing.JTextField" binding="lastUsableField">
@@ -97,7 +97,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Zadaj broadcastovú adresu:"/>
+              <text value="Enter broadcast address:"/>
             </properties>
           </component>
           <component id="55352" class="javax.swing.JTextField" binding="broadcastField">
@@ -128,7 +128,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Over výsledok"/>
+              <text value="Check answers"/>
             </properties>
           </component>
           <component id="66808" class="javax.swing.JButton" binding="button2" default-binding="true">
@@ -139,7 +139,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Nová IP adresa"/>
+              <text value="New IP address"/>
             </properties>
           </component>
           <component id="59972" class="javax.swing.JButton" binding="button3">
@@ -148,7 +148,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Vypíš výsledok"/>
+              <text value="Show answers"/>
             </properties>
           </component>
         </children>
