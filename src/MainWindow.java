@@ -81,10 +81,10 @@ public class MainWindow {
             this.broadcastResultLabel.setText("");
         });
         this.button3.addActionListener(e -> {
-            this.networkAddressField.setText(this.result.calculateNetworkAddress());
-            this.firstUsableField.setText(this.result.calculateFirstHost());
-            this.lastUsableField.setText(this.result.calculateLastHost());
-            this.broadcastField.setText(this.result.calculateBroadcastAddress());
+            this.networkAddressField.setText(this.result.getNetworkAddressString());
+            this.firstUsableField.setText(this.result.getFirstHostString());
+            this.lastUsableField.setText(this.result.getLastHostString());
+            this.broadcastField.setText(this.result.getBroadcastAddressString());
         });
 
         this.frame = new JFrame("Subnetting");
