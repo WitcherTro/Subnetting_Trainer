@@ -23,26 +23,28 @@ public enum SubnetMasks {
     prefix29(255, 255, 255, 248, 29, 0, 0, 0, 7),
     prefix30(255, 255, 255, 252, 30, 0, 0, 0, 3);
 
-
     private int[] subnetMask;
     private int prefix;
-    private int[] wildCard;
+    private int[] wildcard;
+
     SubnetMasks(int a, int b, int c, int d, int prefix, int e, int f, int g, int h) {
         this.subnetMask = new int[]{a, b, c, d};
         this.prefix = prefix;
-        this.wildCard = new int[]{e, f, g, h};
+        this.wildcard = new int[]{e, f, g, h};
     }
     public int[] getSubnetMask() {
         return this.subnetMask;
     }
+
     public int getPrefix() {
         return this.prefix;
     }
-    public int[] getWildCard() {
-        return this.wildCard;
-    }
-    public String toString() {
-        return this.subnetMask[0] + "." + this.subnetMask[1] + "." + this.subnetMask[2] + "." + this.subnetMask[3];
+
+    public int[] getWildcard() {
+        return this.wildcard;
     }
 
+    public String toString() {
+        return IPAddress.formatAddress(subnetMask);
+    }
 }

@@ -1,87 +1,71 @@
 public class ResultCalculator {
-    private int[] ipAdress;
+    private int[] ipAddress;
     private SubnetMasks subnetMask;
-    private String networkAdress;
 
-    public ResultCalculator(int[] ipAdress, SubnetMasks mask) {
-        this.ipAdress = ipAdress;
+    public ResultCalculator(int[] ipAddress, SubnetMasks mask) {
+        this.ipAddress = ipAddress;
         this.subnetMask = mask;
-        this.networkAdress = calculateNetworkAdress();
     }
 
-    public String calculateNetworkAdress() {
-        int[] networkAdress = new int[4];
+    public int[] calculateNetworkAddress() {
+        int[] networkAddress = new int[4];
+        int[] subnetMask = this.subnetMask.getSubnetMask();
         for (int i = 0; i < 4; i++) {
-            networkAdress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
+            networkAddress[i] = this.ipAddress[i] & subnetMask[i];
         }
-        return networkAdress[0] + "." + networkAdress[1] + "." + networkAdress[2] + "." + networkAdress[3];
+        return networkAddress;
     }
 
-    public int[] getNetworkAdress() {
-        int[] networkAdress = new int[4];
-        for (int i = 0; i < 4; i++) {
-            networkAdress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
-        }
-        return networkAdress;
+    public String getNetworkAddressString() {
+        return IPAddress.formatAddress(this.calculateNetworkAddress());
     }
 
-    public boolean compareNetworkAdress(String networkAdress) {
-        String thisNetworkadress = this.calculateNetworkAdress();
-        if (thisNetworkadress.equals(networkAdress)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public boolean compareBroadcastAdress(String broadcastAdress) {
-        String thisBroadcastAdress = this.calculateBroadcastAdress();
-        if (thisBroadcastAdress.equals(broadcastAdress)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public boolean compareFirstHost(String firstHost) {
-        String thisFirstHost = this.calculateFirstHost();
-        if (thisFirstHost.equals(firstHost)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public boolean compareLastHost(String lastHost) {
-        String thisLastHost = this.calculateLastHost();
-        if (thisLastHost.equals(lastHost)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public String calculateFirstHost() {
-        int[] firstHost = this.getNetworkAdress();
+    public int[] calculateFirstHost() {
+        int[] firstHost = this.calculateNetworkAddress();
         firstHost[3] += 1;
-        return firstHost[0] + "." + firstHost[1] + "." + firstHost[2] + "." + firstHost[3];
-    }
-    public String calculateLastHost() {
-        int[] lastHost = this.getNetworkAdress();
-        int[] wildcardMask = this.subnetMask.getWildCard();
-        for (int i = 0; i < 4; i++) {
-            lastHost[i] = lastHost[i] | wildcardMask[i];
-        }
-        lastHost[3] -= 1;
-        return lastHost[0] + "." + lastHost[1] + "." + lastHost[2] + "." + lastHost[3];
+        return firstHost;
     }
 
-    public String calculateBroadcastAdress() {
-        int[] broadcastAdress = this.getNetworkAdress();
-        int[] wildcardMask = this.subnetMask.getWildCard();
+    public String getFirstHostString() {
+        return IPAddress.formatAddress(this.calculateFirstHost());
+    }
+
+    public int[] calculateLastHost() {
+        int[] lastHost = this.calculateBroadcastAddress();
+        lastHost[3] -= 1;
+        return lastHost;
+    }
+
+    public String getLastHostString() {
+        return IPAddress.formatAddress(this.calculateLastHost());
+    }
+
+    private int[] calculateBroadcastAddress() {
+        int[] broadcastAddress = this.calculateNetworkAddress();
+        int[] wildcardMask = this.subnetMask.getWildcard();
         for (int i = 0; i < 4; i++) {
-            broadcastAdress[i] = broadcastAdress[i] | wildcardMask[i];
+            broadcastAddress[i] = broadcastAddress[i] | wildcardMask[i];
         }
-        return broadcastAdress[0] + "." + broadcastAdress[1] + "." + broadcastAdress[2] + "." + broadcastAdress[3];
+        return broadcastAddress;
+    }
+
+    public String getBroadcastAddressString() {
+        return IPAddress.formatAddress(this.calculateBroadcastAddress());
+    }
+
+    public boolean compareNetworkAddress(String networkAddress) {
+        return this.getNetworkAddressString().equals(networkAddress);
+    }
+
+    public boolean compareBroadcastAddress(String broadcastAddress) {
+        return this.getBroadcastAddressString().equals(broadcastAddress);
+    }
+
+    public boolean compareFirstHost(String firstHost) {
+        return this.getFirstHostString().equals(firstHost);
+    }
+
+    public boolean compareLastHost(String lastHost) {
+        return this.getLastHostString().equals(lastHost);
     }
 }
