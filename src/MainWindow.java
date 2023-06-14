@@ -6,11 +6,11 @@ public class MainWindow {
     private JFrame frame;
     private JButton button1;
     private JButton button2;
-    private JTextField networkAdressField;
+    private JTextField networkAddressField;
     private JLabel ipLabel;
     private JLabel maskLabel;
-    private JLabel networkAdressLabel;
-    private JLabel networkAdressResultLabel;
+    private JLabel networkAddressLabel;
+    private JLabel networkAddressResultLabel;
     private JTextField firstUsableField;
     private JTextField lastUsableField;
     private JTextField broadcastField;
@@ -18,29 +18,29 @@ public class MainWindow {
     private JLabel firstUsableResultLabel;
     private JLabel lastUsableResultLabel;
     private JLabel broadcastResultLabel;
-    private IPAdress ipAdress;
+    private IPAddress ipAddress;
     private SubnetMasks mask;
     private ResultCalculator result;
 
     public MainWindow() {
-        this.ipAdress = new IPAdress();
+        this.ipAddress = new IPAddress();
         this.mask = SubnetMasks.values()[(int) (Math.random() * 22)];
-        this.result = new ResultCalculator(ipAdress.getIPAdress(), mask);
-        this.ipLabel.setText("IP: "+ipAdress.toString());
+        this.result = new ResultCalculator(ipAddress.getIPAddress(), mask);
+        this.ipLabel.setText("IP: "+ ipAddress.toString());
         this.maskLabel.setText("Mask: "+mask.toString() + "/" + mask.getPrefix());
 
 
         this.button1.addActionListener(e -> {
-            String networkadress = this.networkAdressField.getText();
+            String networkAddress = this.networkAddressField.getText();
             String firstUsable = this.firstUsableField.getText();
             String lastUsable = this.lastUsableField.getText();
             String broadcast = this.broadcastField.getText();
-            if (this.result.compareNetworkAdress(networkadress)) {
-                this.networkAdressResultLabel.setForeground(Color.GREEN);
-                this.networkAdressResultLabel.setText("Network address: OK");
+            if (this.result.compareNetworkAddress(networkAddress)) {
+                this.networkAddressResultLabel.setForeground(Color.GREEN);
+                this.networkAddressResultLabel.setText("Network address: OK");
             } else {
-                this.networkAdressResultLabel.setForeground(Color.RED);
-                this.networkAdressResultLabel.setText("Network address: BAD");
+                this.networkAddressResultLabel.setForeground(Color.RED);
+                this.networkAddressResultLabel.setText("Network address: BAD");
             }
             if (this.result.compareFirstHost(firstUsable)) {
                 this.firstUsableResultLabel.setForeground(Color.GREEN);
@@ -66,13 +66,13 @@ public class MainWindow {
         });
 
         this.button2.addActionListener(e -> {
-            this.ipAdress.generateNewAdress();
+            this.ipAddress.generateNewAddress();
             this.mask = SubnetMasks.values()[(int) (Math.random() * 22)];
-            this.result = new ResultCalculator(ipAdress.getIPAdress(), mask);
-            this.ipLabel.setText("IP: "+ipAdress.toString());
+            this.result = new ResultCalculator(ipAddress.getIPAddress(), mask);
+            this.ipLabel.setText("IP: "+ ipAddress.toString());
             this.maskLabel.setText("Mask: "+mask.toString() + "/" + mask.getPrefix());
-            this.networkAdressField.setText("");
-            this.networkAdressResultLabel.setText("");
+            this.networkAddressField.setText("");
+            this.networkAddressResultLabel.setText("");
             this.firstUsableField.setText("");
             this.firstUsableResultLabel.setText("");
             this.lastUsableField.setText("");
@@ -81,10 +81,10 @@ public class MainWindow {
             this.broadcastResultLabel.setText("");
         });
         this.button3.addActionListener(e -> {
-            this.networkAdressField.setText(this.result.calculateNetworkAdress());
+            this.networkAddressField.setText(this.result.calculateNetworkAddress());
             this.firstUsableField.setText(this.result.calculateFirstHost());
             this.lastUsableField.setText(this.result.calculateLastHost());
-            this.broadcastField.setText(this.result.calculateBroadcastAdress());
+            this.broadcastField.setText(this.result.calculateBroadcastAddress());
         });
 
         this.frame = new JFrame("Subnetting");
@@ -93,7 +93,5 @@ public class MainWindow {
         this.frame.setResizable(false);
         this.frame.pack();
         this.frame.setVisible(true);
-
-
     }
 }

@@ -1,74 +1,53 @@
 public class ResultCalculator {
     private int[] ipAdress;
     private SubnetMasks subnetMask;
-    private String networkAdress;
+    private String networkAddress;
 
-    public ResultCalculator(int[] ipAdress, SubnetMasks mask) {
-        this.ipAdress = ipAdress;
+    public ResultCalculator(int[] ipAddress, SubnetMasks mask) {
+        this.ipAdress = ipAddress;
         this.subnetMask = mask;
-        this.networkAdress = calculateNetworkAdress();
+        this.networkAddress = calculateNetworkAddress();
     }
 
-    public String calculateNetworkAdress() {
-        int[] networkAdress = new int[4];
+    public String calculateNetworkAddress() {
+        int[] networkAddress = new int[4];
         for (int i = 0; i < 4; i++) {
-            networkAdress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
+            networkAddress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
         }
-        return networkAdress[0] + "." + networkAdress[1] + "." + networkAdress[2] + "." + networkAdress[3];
+        return networkAddress[0] + "." + networkAddress[1] + "." + networkAddress[2] + "." + networkAddress[3];
     }
 
-    public int[] getNetworkAdress() {
-        int[] networkAdress = new int[4];
+    public int[] getNetworkAddress() {
+        int[] networkAddress = new int[4];
         for (int i = 0; i < 4; i++) {
-            networkAdress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
+            networkAddress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
         }
-        return networkAdress;
+        return networkAddress;
     }
 
-    public boolean compareNetworkAdress(String networkAdress) {
-        String thisNetworkadress = this.calculateNetworkAdress();
-        if (thisNetworkadress.equals(networkAdress)) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean compareNetworkAddress(String networkAddress) {
+        return this.calculateNetworkAddress().equals(networkAddress);
     }
 
-
-    public boolean compareBroadcastAdress(String broadcastAdress) {
-        String thisBroadcastAdress = this.calculateBroadcastAdress();
-        if (thisBroadcastAdress.equals(broadcastAdress)) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean compareBroadcastAdress(String broadcastAddress) {
+        return this.calculateBroadcastAddress().equals(broadcastAddress);
     }
     public boolean compareFirstHost(String firstHost) {
-        String thisFirstHost = this.calculateFirstHost();
-        if (thisFirstHost.equals(firstHost)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.calculateFirstHost().equals(firstHost);
     }
     public boolean compareLastHost(String lastHost) {
-        String thisLastHost = this.calculateLastHost();
-        if (thisLastHost.equals(lastHost)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.calculateLastHost().equals(lastHost);
     }
 
-
     public String calculateFirstHost() {
-        int[] firstHost = this.getNetworkAdress();
+        int[] firstHost = this.getNetworkAddress();
         firstHost[3] += 1;
         return firstHost[0] + "." + firstHost[1] + "." + firstHost[2] + "." + firstHost[3];
     }
+
     public String calculateLastHost() {
-        int[] lastHost = this.getNetworkAdress();
-        int[] wildcardMask = this.subnetMask.getWildCard();
+        int[] lastHost = this.getNetworkAddress();
+        int[] wildcardMask = this.subnetMask.getWildcard();
         for (int i = 0; i < 4; i++) {
             lastHost[i] = lastHost[i] | wildcardMask[i];
         }
@@ -76,9 +55,9 @@ public class ResultCalculator {
         return lastHost[0] + "." + lastHost[1] + "." + lastHost[2] + "." + lastHost[3];
     }
 
-    public String calculateBroadcastAdress() {
-        int[] broadcastAdress = this.getNetworkAdress();
-        int[] wildcardMask = this.subnetMask.getWildCard();
+    public String calculateBroadcastAddress() {
+        int[] broadcastAdress = this.getNetworkAddress();
+        int[] wildcardMask = this.subnetMask.getWildcard();
         for (int i = 0; i < 4; i++) {
             broadcastAdress[i] = broadcastAdress[i] | wildcardMask[i];
         }
