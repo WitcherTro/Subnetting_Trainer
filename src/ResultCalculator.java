@@ -1,10 +1,10 @@
 public class ResultCalculator {
-    private int[] ipAdress;
+    private int[] ipAddress;
     private SubnetMasks subnetMask;
     private String networkAddress;
 
     public ResultCalculator(int[] ipAddress, SubnetMasks mask) {
-        this.ipAdress = ipAddress;
+        this.ipAddress = ipAddress;
         this.subnetMask = mask;
         this.networkAddress = calculateNetworkAddress();
     }
@@ -12,15 +12,15 @@ public class ResultCalculator {
     public String calculateNetworkAddress() {
         int[] networkAddress = new int[4];
         for (int i = 0; i < 4; i++) {
-            networkAddress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
+            networkAddress[i] = this.ipAddress[i] & this.subnetMask.getSubnetMask()[i];
         }
-        return networkAddress[0] + "." + networkAddress[1] + "." + networkAddress[2] + "." + networkAddress[3];
+        return IPAddress.formatAddress(networkAddress);
     }
 
     public int[] getNetworkAddress() {
         int[] networkAddress = new int[4];
         for (int i = 0; i < 4; i++) {
-            networkAddress[i] = this.ipAdress[i] & this.subnetMask.getSubnetMask()[i];
+            networkAddress[i] = this.ipAddress[i] & this.subnetMask.getSubnetMask()[i];
         }
         return networkAddress;
     }
@@ -29,7 +29,7 @@ public class ResultCalculator {
         return this.calculateNetworkAddress().equals(networkAddress);
     }
 
-    public boolean compareBroadcastAdress(String broadcastAddress) {
+    public boolean compareBroadcastAddress(String broadcastAddress) {
         return this.calculateBroadcastAddress().equals(broadcastAddress);
     }
     public boolean compareFirstHost(String firstHost) {
@@ -42,7 +42,7 @@ public class ResultCalculator {
     public String calculateFirstHost() {
         int[] firstHost = this.getNetworkAddress();
         firstHost[3] += 1;
-        return firstHost[0] + "." + firstHost[1] + "." + firstHost[2] + "." + firstHost[3];
+        return IPAddress.formatAddress(firstHost);
     }
 
     public String calculateLastHost() {
@@ -52,15 +52,15 @@ public class ResultCalculator {
             lastHost[i] = lastHost[i] | wildcardMask[i];
         }
         lastHost[3] -= 1;
-        return lastHost[0] + "." + lastHost[1] + "." + lastHost[2] + "." + lastHost[3];
+        return IPAddress.formatAddress(lastHost);
     }
 
     public String calculateBroadcastAddress() {
-        int[] broadcastAdress = this.getNetworkAddress();
+        int[] broadcastAddress = this.getNetworkAddress();
         int[] wildcardMask = this.subnetMask.getWildcard();
         for (int i = 0; i < 4; i++) {
-            broadcastAdress[i] = broadcastAdress[i] | wildcardMask[i];
+            broadcastAddress[i] = broadcastAddress[i] | wildcardMask[i];
         }
-        return broadcastAdress[0] + "." + broadcastAdress[1] + "." + broadcastAdress[2] + "." + broadcastAdress[3];
+        return IPAddress.formatAddress(broadcastAddress);
     }
 }

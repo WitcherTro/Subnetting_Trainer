@@ -45,6 +45,6 @@ public enum SubnetMasks {
     }
 
     public String toString() {
-        return this.subnetMask[0] + "." + this.subnetMask[1] + "." + this.subnetMask[2] + "." + this.subnetMask[3];
+        return IPAddress.formatAddress(subnetMask);
     }
 }

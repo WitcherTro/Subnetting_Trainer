@@ -56,7 +56,7 @@ public class MainWindow {
                 this.lastUsableResultLabel.setForeground(Color.RED);
                 this.lastUsableResultLabel.setText("Last usable address: BAD");
             }
-            if (this.result.compareBroadcastAdress(broadcast)) {
+            if (this.result.compareBroadcastAddress(broadcast)) {
                 this.broadcastResultLabel.setForeground(Color.GREEN);
                 this.broadcastResultLabel.setText("Broadcast address: OK");
             } else {

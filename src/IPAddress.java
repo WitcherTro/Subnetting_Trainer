@@ -1,6 +1,13 @@
 public class IPAddress {
     private int[] ipAddress;
 
+    public static String formatAddress(int[] address) {
+        if (address.length != 4) {
+            return "";
+        }
+        return "%d.%d.%d.%d".formatted(address[0],address[1],address[2],address[3]);
+    }
+
     public IPAddress() {
         this.ipAddress = generateIPAddress();
     }
@@ -14,7 +21,7 @@ public class IPAddress {
     }
 
     public String toString() {
-        return ipAddress[0] + "." + ipAddress[1] + "." + ipAddress[2] + "." + ipAddress[3];
+        return formatAddress(this.ipAddress);
     }
 
     public int[] generateIPAddress() {
